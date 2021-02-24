@@ -1,6 +1,8 @@
 package com.angelo.spaceshooter;
+import com.angelo.spaceshooter.tools.CollisionRect;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
+
 
 public abstract class Bullet {
 
@@ -11,14 +13,20 @@ public abstract class Bullet {
     private int height;
     private int width;
 
+    private CollisionRect collision;
+
     private boolean remove;
 
-    Bullet(float posX, float posY, Texture bulletImg) {
+    Bullet(float posX, float posY, int height, int width, Texture bulletImg) {
         this.posX = posX;
         this.posY = posY;
         this.bullet = new Rectangle();
         this.bulletImg = bulletImg;
         this.remove = false;
+        this.height = height;
+        this.width = width;
+
+        this.collision = new CollisionRect(this.posX, this.posY, this.height, this.width);
     }
 
     public void updateAttack() {
@@ -38,6 +46,9 @@ public abstract class Bullet {
         return posY;
     }
 
+    public int getHeight() {return this.height;}
+    public int getWidth() {return this.width;}
+
     public Texture getTexture(){ return bulletImg; }
     public Rectangle getRectangle(){
         return bullet;
@@ -48,5 +59,9 @@ public abstract class Bullet {
     }
     public boolean getRemove() {
         return this.remove;
+    }
+
+    public CollisionRect getCollision() {
+        return this.collision;
     }
 }

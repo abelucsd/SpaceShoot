@@ -1,4 +1,5 @@
 package com.angelo.spaceshooter;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.Gdx;
@@ -13,7 +14,7 @@ public class Hero extends Ship{
     ArrayList<Bullet> bulletList = new ArrayList<Bullet>();
 
     Hero(float posX, float posY, String weaponKind) {
-        super(posX, posY, new Texture("hero.png"));
+        super(posX, posY, 15, 16, new Texture("hero.png"));
         this.weaponKind = weaponKind;
         //weapon = new BasicWeapon("lazer", this.getX(), this.getY());
     }
@@ -36,7 +37,7 @@ public class Hero extends Ship{
         //weapon.fire(this.getX(), this.getY());
     }
 
-    public void updateAttack() {
+    public void updateAttack(ArrayList<Ship> enemies) {
         // condition to run this. bullet exists
         if (!bulletList.isEmpty()) {
             /* loop through all the bullets */
@@ -44,6 +45,22 @@ public class Hero extends Ship{
                 bullet.updateAttack(); // change. crate a diff function.
                 if (bullet.getY() > Gdx.graphics.getHeight()){
                     bullet.setRemove(true);
+                }
+                bullet.getCollision().updateVariables(bullet.getX(), bullet.getY(), bullet.getHeight(), bullet.getWidth());
+
+
+            }
+            // check for all enemies. O(n^2)? Let's work with this for now.
+            // get all the enemies.
+            for (Bullet bullet: bulletList) {
+                int idx = 0;
+                while (idx < enemies.size()) {
+                    if (bullet.getCollision().collidesWith(enemies.get(idx).getCollision().getColissionRect())) {
+                        enemies.remove(enemies.get(idx));
+                        System.out.println("collided");
+                    }
+                    else
+                        idx++;
                 }
             }
 

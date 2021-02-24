@@ -59,7 +59,7 @@ public class SpaceShooterGame extends ApplicationAdapter {
 			hero.attack();
 		}
 
-		hero.updateAttack();
+		hero.updateAttack(basicEnemies);
 		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) hero.setX(hero.getX() - 200 * Gdx.graphics.getDeltaTime());
 		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT))  hero.setX(hero.getX() + 200 * Gdx.graphics.getDeltaTime());
 

@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public class EnemyFactory {
     // creates enemies.
     private static int xSpacing = 40;
-    private int initPosX = 800/2 - 64/2;
-    private int initPosY = 480 - 64/2 - 20;
+    private float initPosX = 800/2 - 64/2;
+    private float initPosY = 480 - 64/2 - 20;
 
 
     EnemyFactory() {
@@ -59,7 +59,7 @@ public class EnemyFactory {
     * Expectation: initialize the x and y position of the enemies.
     * */
     private void enemySpacing(ArrayList<Ship> enemies, int numEnemies) {
-        int sumPosXSpace = initPosX;
+        float sumPosXSpace = initPosX;
         for (int i = 0; i < numEnemies; i++) {
             sumPosXSpace += xSpacing;
             enemies.get(i).setX(sumPosXSpace);

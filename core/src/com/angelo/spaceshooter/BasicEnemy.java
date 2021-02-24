@@ -10,7 +10,7 @@ public class BasicEnemy extends Ship {
     * */
     Texture img;
 
-    BasicEnemy(int posX, int posY) {
-        super(posX, posY, new Texture("basicEnemy.png"));
+    BasicEnemy(float posX, float posY) {
+        super(posX, posY, 30, 32, new Texture("basicEnemy.png"));
     }
 }

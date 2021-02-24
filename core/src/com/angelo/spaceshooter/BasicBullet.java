@@ -5,15 +5,15 @@ public class BasicBullet extends Bullet {
 
     BasicBullet(float posX, float posY) {
         // change pos to floats
-        super(posX, posY, new Texture("6.png"));
+        // have constant height and width 5 for now.
+        super(posX, posY, 15, 15, new Texture("6.png"));
     }
 
     public void updateAttack() {
         // change to use vectors.
         // don't think we need the current positions passed in. It should have knowledge from creation.
-        System.out.println("updateattack");
         this.setY(this.getY() + 100 * Gdx.graphics.getDeltaTime());
-    }
+        this.getCollision().updateVariables(this.getX(), this.getY(), this.getHeight(), this.getWidth());
 
-    // create delete function
+    }
 }
