@@ -38,5 +38,11 @@ public abstract class Weapon {
         return this.posY;
     }
 
+
+    public void remove(){
+
+    }
+
     abstract public void fire(float posX, float posY);
+
 }

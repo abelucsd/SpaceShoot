@@ -13,9 +13,6 @@ import java.util.ArrayList;
 
 public class SpaceShooterGame extends ApplicationAdapter {
 	SpriteBatch batch;
-	//Texture heroImg;
-	//private Rectangle hero;
-
 	// make the hero
 	Hero hero;
 
@@ -30,15 +27,7 @@ public class SpaceShooterGame extends ApplicationAdapter {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		/*
-		heroImg = new Texture("hero.png");
-		hero = new Rectangle();
-		hero.x = 800/2 - 64 /2;
-		hero.y = 20;
-		hero.width = 10;
-		hero.height = 8;
-		*/
-		hero = new Hero(800/2, 20);
+		hero = new Hero(800/2, 20, "basic");
 		basicEnemies = enemyFactory.createEnemies("basic", 5);
 	}
 
@@ -51,7 +40,9 @@ public class SpaceShooterGame extends ApplicationAdapter {
 		for (Ship basicEnemy: basicEnemies) {
 			batch.draw(basicEnemy.getTexture(), basicEnemy.getX(), basicEnemy.getY());
 		}
-		batch.draw(hero.getWeapon().getTexture(), hero.getWeapon().getX(), hero.getWeapon().getY());
+		for (Bullet bullet: hero.getBullets()) {
+			batch.draw(bullet.getTexture(), bullet.getX(), bullet.getY());
+		}
 		batch.end();
 
 		/*if (Gdx.input.isTouched()) {
@@ -68,12 +59,10 @@ public class SpaceShooterGame extends ApplicationAdapter {
 			hero.attack();
 		}
 
-
+		hero.updateAttack();
 		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) hero.setX(hero.getX() - 200 * Gdx.graphics.getDeltaTime());
 		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT))  hero.setX(hero.getX() + 200 * Gdx.graphics.getDeltaTime());
 
-		//if (hero.x < 0) hero.x = 0;
-		//if (hero.x > 800-64 ) hero.x = 800-64;
 	}
 	
 	@Override
