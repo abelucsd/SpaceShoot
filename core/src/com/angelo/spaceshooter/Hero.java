@@ -1,6 +1,4 @@
 package com.angelo.spaceshooter;
-import com.badlogic.gdx.math.Interpolation;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.Gdx;
 
@@ -13,10 +11,18 @@ public class Hero extends Ship{
     /* Create ArrayList of Bullet */
     ArrayList<Bullet> bulletList = new ArrayList<Bullet>();
 
+    // Scores
+    private Scores score;
+
     Hero(float posX, float posY, String weaponKind) {
         super(posX, posY, 15, 16, new Texture("hero.png"));
         this.weaponKind = weaponKind;
         //weapon = new BasicWeapon("lazer", this.getX(), this.getY());
+        this.score = new Scores();
+    }
+
+    public Scores getScore() {
+        return this.score;
     }
 
     public ArrayList<Bullet> getBullets() {
@@ -47,8 +53,6 @@ public class Hero extends Ship{
                     bullet.setRemove(true);
                 }
                 bullet.getCollision().updateVariables(bullet.getX(), bullet.getY(), bullet.getHeight(), bullet.getWidth());
-
-
             }
             // check for all enemies. O(n^2)? Let's work with this for now.
             // get all the enemies.
@@ -58,6 +62,7 @@ public class Hero extends Ship{
                     if (bullet.getCollision().collidesWith(enemies.get(idx).getCollision().getColissionRect())) {
                         enemies.remove(enemies.get(idx));
                         System.out.println("collided");
+                        this.score.update(100);
                     }
                     else
                         idx++;
@@ -75,9 +80,4 @@ public class Hero extends Ship{
             }
         }
     }
-
-    // delete this. Refactored to WeaponFactory to making bullets, not weapons.
-    /*public Weapon getWeapon() {
-        return this.weapon;
-    }*/
 }

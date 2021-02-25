@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
@@ -23,12 +24,16 @@ public class SpaceShooterGame extends ApplicationAdapter {
 
 	EnemyFactory enemyFactory = new EnemyFactory();
 
+	BitmapFont font;
+
 	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		hero = new Hero(800/2, 20, "basic");
 		basicEnemies = enemyFactory.createEnemies("basic", 5);
+
+		font = new BitmapFont();
 	}
 
 	@Override
@@ -36,6 +41,9 @@ public class SpaceShooterGame extends ApplicationAdapter {
 		Gdx.gl.glClearColor(0, 0, .2f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
+
+
+
 		batch.draw(hero.getTexture(), hero.getX(), hero.getY());
 		for (Ship basicEnemy: basicEnemies) {
 			batch.draw(basicEnemy.getTexture(), basicEnemy.getX(), basicEnemy.getY());
@@ -43,6 +51,16 @@ public class SpaceShooterGame extends ApplicationAdapter {
 		for (Bullet bullet: hero.getBullets()) {
 			batch.draw(bullet.getTexture(), bullet.getX(), bullet.getY());
 		}
+
+		if (Gdx.input.isTouched()) {
+			hero.attack();
+		}
+
+
+		hero.updateAttack(basicEnemies);
+
+		font.draw(batch, hero.getScore().getScoreString(), 10, 10);
+
 		batch.end();
 
 		/*if (Gdx.input.isTouched()) {
@@ -55,11 +73,7 @@ public class SpaceShooterGame extends ApplicationAdapter {
 			hero.setX(touchPos.x - 64/2);
 		}*/
 
-		if (Gdx.input.isTouched()) {
-			hero.attack();
-		}
 
-		hero.updateAttack(basicEnemies);
 		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) hero.setX(hero.getX() - 200 * Gdx.graphics.getDeltaTime());
 		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT))  hero.setX(hero.getX() + 200 * Gdx.graphics.getDeltaTime());
 
