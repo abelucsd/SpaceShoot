@@ -43,7 +43,7 @@ public class Hero extends Ship{
         //weapon.fire(this.getX(), this.getY());
     }
 
-    public void updateAttack(ArrayList<Ship> enemies) {
+    public void updateAttack(ArrayList<Enemy> enemies) {
         // condition to run this. bullet exists
         if (!bulletList.isEmpty()) {
             /* loop through all the bullets */

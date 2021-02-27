@@ -1,4 +1,5 @@
 package com.angelo.spaceshooter;
+import com.badlogic.gdx.Gdx;
 
 import java.util.ArrayList;
 
@@ -16,8 +17,8 @@ public class EnemyFactory {
     * Input: What kind of enemy is it?; # of enemies
     * Return: Enemy object
     * */
-    public ArrayList<Ship> createEnemies(String enemyKind, int numEnemies) {
-        ArrayList<Ship> enemies = new ArrayList<Ship>();
+    public ArrayList<Enemy> createEnemies(String enemyKind, int numEnemies) {
+        ArrayList<Enemy> enemies = new ArrayList<Enemy>();
         for (int i = 0; i < numEnemies; i++) {
             // create specific enemy
             enemies.add(createEnemy(enemyKind));
@@ -31,11 +32,11 @@ public class EnemyFactory {
     *  Input: Kind of enemy
     *  Return: Enemy but specific through polymorphism
     * */
-    private Ship createEnemy(String enemyKind) {
-        Ship enemy = null;
+    private Enemy createEnemy(String enemyKind) {
+        Enemy enemy = null;
         switch(enemyKind) {
             case "basic" :
-                enemy = new BasicEnemy(0, 0);
+                enemy = new BasicEnemy(0, Gdx.graphics.getHeight() + 100);
                 break;
             case "skinny":
                 //enemy = new SkinnyEnemy();
@@ -58,12 +59,12 @@ public class EnemyFactory {
     * Return: void
     * Expectation: initialize the x and y position of the enemies.
     * */
-    private void enemySpacing(ArrayList<Ship> enemies, int numEnemies) {
+    private void enemySpacing(ArrayList<Enemy> enemies, int numEnemies) {
         float sumPosXSpace = initPosX;
         for (int i = 0; i < numEnemies; i++) {
             sumPosXSpace += xSpacing;
             enemies.get(i).setX(sumPosXSpace);
-            enemies.get(i).setY(initPosY);
+            //enemies.get(i).setY(initPosY);
         }
     }
 }

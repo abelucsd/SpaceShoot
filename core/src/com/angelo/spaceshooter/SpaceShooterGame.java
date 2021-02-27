@@ -13,12 +13,13 @@ import com.badlogic.gdx.math.Vector3;
 import java.util.ArrayList;
 
 public class SpaceShooterGame extends ApplicationAdapter {
+	//private int screenHeight = Gdx.graphics.getHeight();
 	SpriteBatch batch;
 	// make the hero
 	Hero hero;
 
 	// make a list of enemies
-	ArrayList<Ship> basicEnemies = new ArrayList<Ship>();
+	ArrayList<Enemy> basicEnemies = new ArrayList<Enemy>();
 	private int enemySpacingX = 40;
 	private int numBasicEnemies = 5;
 
@@ -42,12 +43,16 @@ public class SpaceShooterGame extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
 
-
+		for (Enemy enemy: basicEnemies) {
+			enemy.entranceAnimation(enemy.getY());
+		}
 
 		batch.draw(hero.getTexture(), hero.getX(), hero.getY());
 		for (Ship basicEnemy: basicEnemies) {
 			batch.draw(basicEnemy.getTexture(), basicEnemy.getX(), basicEnemy.getY());
 		}
+
+
 		for (Bullet bullet: hero.getBullets()) {
 			batch.draw(bullet.getTexture(), bullet.getX(), bullet.getY());
 		}
