@@ -29,7 +29,7 @@ public abstract class Bullet {
         this.collision = new CollisionRect(this.posX, this.posY, this.height, this.width);
     }
 
-    public void updateAttack() {
+    public void updateAttack(int direction, int multiplier) {
 
     }
 

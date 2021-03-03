@@ -10,7 +10,7 @@ public class EnemyFactory {
     private float initPosY = 480 - 64/2 - 20;
 
 
-    EnemyFactory() {
+    public EnemyFactory() {
     }
 
     /*

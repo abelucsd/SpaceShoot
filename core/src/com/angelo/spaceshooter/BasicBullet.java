@@ -9,10 +9,10 @@ public class BasicBullet extends Bullet {
         super(posX, posY, 15, 15, new Texture("6.png"));
     }
 
-    public void updateAttack() {
+    public void updateAttack(int direction, int multiplier) {
         // change to use vectors.
         // don't think we need the current positions passed in. It should have knowledge from creation.
-        this.setY(this.getY() + 100 * Gdx.graphics.getDeltaTime());
+        this.setY(this.getY() + (direction)*(multiplier) * Gdx.graphics.getDeltaTime());
         this.getCollision().updateVariables(this.getX(), this.getY(), this.getHeight(), this.getWidth());
 
     }

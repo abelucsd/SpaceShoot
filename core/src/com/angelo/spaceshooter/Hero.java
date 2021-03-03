@@ -14,7 +14,7 @@ public class Hero extends Ship{
     // Scores
     private Scores score;
 
-    Hero(float posX, float posY, String weaponKind) {
+    public Hero(float posX, float posY, String weaponKind) {
         super(posX, posY, 15, 16, new Texture("hero.png"));
         this.weaponKind = weaponKind;
         //weapon = new BasicWeapon("lazer", this.getX(), this.getY());
@@ -48,7 +48,7 @@ public class Hero extends Ship{
         if (!bulletList.isEmpty()) {
             /* loop through all the bullets */
             for (Bullet bullet: bulletList) {
-                bullet.updateAttack(); // change. crate a diff function.
+                bullet.updateAttack(1, 100); // change. crate a diff function.
                 if (bullet.getY() > Gdx.graphics.getHeight()){
                     bullet.setRemove(true);
                 }
