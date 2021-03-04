@@ -6,24 +6,16 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import sun.tools.jar.Main;
 import com.angelo.spaceshooter.EnemyFactory;
 import java.util.ArrayList;
 
 public class MainGameScreen implements Screen {
-
     SpaceShooterGame game;
-
-    // make the hero
     Hero hero;
-
-    // make a list of enemies
     ArrayList<Enemy> basicEnemies = new ArrayList<Enemy>();
     private int enemySpacingX = 40;
     private int numBasicEnemies = 5;
-
     EnemyFactory enemyFactory = new EnemyFactory();
-
     BitmapFont font;
     private float clock;
 

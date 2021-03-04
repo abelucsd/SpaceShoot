@@ -1,6 +1,10 @@
 package com.angelo.spaceshooter;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
+
+/*
+* Unused class
+* */
 public abstract class Weapon {
     private Rectangle weapon;
     private Texture weaponImg;

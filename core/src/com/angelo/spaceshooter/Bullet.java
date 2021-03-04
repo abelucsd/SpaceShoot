@@ -3,6 +3,9 @@ import com.angelo.spaceshooter.tools.CollisionRect;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 
+/*
+* Created at WeaponFactory
+* */
 
 public abstract class Bullet {
 

@@ -1,6 +1,5 @@
 package com.angelo.spaceshooter.screens;
 
-import com.angelo.spaceshooter.SpaceShooterGame;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;

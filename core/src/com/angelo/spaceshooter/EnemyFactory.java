@@ -8,6 +8,7 @@ public class EnemyFactory {
     private static int xSpacing = 40;
     private float initPosX = 800/2 - 64/2;
     private float initPosY = 480 - 64/2 - 20;
+    private final float ABOVE_HEIGHT = 100;
 
 
     public EnemyFactory() {
@@ -20,10 +21,9 @@ public class EnemyFactory {
     public ArrayList<Enemy> createEnemies(String enemyKind, int numEnemies) {
         ArrayList<Enemy> enemies = new ArrayList<Enemy>();
         for (int i = 0; i < numEnemies; i++) {
-            // create specific enemy
             enemies.add(createEnemy(enemyKind));
         }
-        // initialize x and y pos for the enemies.
+        // initialize x pos for the enemies.
         enemySpacing(enemies, numEnemies);
         return enemies;
     }
@@ -31,12 +31,13 @@ public class EnemyFactory {
     /*
     *  Input: Kind of enemy
     *  Return: Enemy but specific through polymorphism
+    *  Details: Height is predefined. The enemies are created outside of screen.
     * */
     private Enemy createEnemy(String enemyKind) {
         Enemy enemy = null;
         switch(enemyKind) {
             case "basic" :
-                enemy = new BasicEnemy(0, Gdx.graphics.getHeight() + 100);
+                enemy = new BasicEnemy(0, Gdx.graphics.getHeight() + ABOVE_HEIGHT);
                 break;
             case "skinny":
                 //enemy = new SkinnyEnemy();
@@ -57,14 +58,13 @@ public class EnemyFactory {
     /*
     * Input: enemy list and # enemies
     * Return: void
-    * Expectation: initialize the x and y position of the enemies.
+    * Expectation: initialize the x position of the enemies.
     * */
     private void enemySpacing(ArrayList<Enemy> enemies, int numEnemies) {
         float sumPosXSpace = initPosX;
         for (int i = 0; i < numEnemies; i++) {
             sumPosXSpace += xSpacing;
             enemies.get(i).setX(sumPosXSpace);
-            //enemies.get(i).setY(initPosY);
         }
     }
 }
