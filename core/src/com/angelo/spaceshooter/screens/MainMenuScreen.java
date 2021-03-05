@@ -2,8 +2,10 @@ package com.angelo.spaceshooter.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Timer;
 
 public class MainMenuScreen implements Screen {
     SpaceShooterGame game;
@@ -26,6 +28,8 @@ public class MainMenuScreen implements Screen {
 
     @Override
     public void render(float v) {
+        Gdx.gl.glClearColor(0, 0, .2f, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         game.batch.begin();
         game.batch.draw(this.mainMenu, START_X, START_Y);
 
@@ -33,7 +37,12 @@ public class MainMenuScreen implements Screen {
             touchPosition.set(Gdx.input.getX(), Gdx.input.getY());
             if (touchPosition.x >= 260 && touchPosition.y >= 300 && touchPosition.x <= 460 && touchPosition.y <= 400) {
                 this.dispose();
-                game.setScreen(new MainGameScreen((game)));
+                Timer.schedule(new Timer.Task() {
+                    @Override
+                    public void run() {
+                        game.setScreen(new MainGameScreen(game));
+                    }
+                }, 1);
             }
         }
         game.batch.end();

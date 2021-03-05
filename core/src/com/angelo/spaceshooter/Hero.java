@@ -9,11 +9,13 @@ public class Hero extends Ship{
     private WeaponFactory weaponFactory = new WeaponFactory();
     ArrayList<Bullet> bulletList = new ArrayList<Bullet>();
     private Scores score;
+    private int health;
 
     public Hero(float posX, float posY, String weaponKind) {
         super(posX, posY, 15, 16, new Texture("hero.png"));
         this.weaponKind = weaponKind;
         this.score = new Scores();
+        this.health = 3;
     }
     public Scores getScore() {
         return this.score;
@@ -22,6 +24,15 @@ public class Hero extends Ship{
         return this.bulletList;
     }
 
+    public void setHealth(int health) {
+        this.health = health;
+    }
+    public int getHealth() {
+        return this.health;
+    }
+    public void updateHealthOnDamage(int damage){
+        this.health -= damage;
+    }
     /*
     *  Input:
     *  Output:

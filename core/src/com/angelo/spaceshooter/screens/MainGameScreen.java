@@ -1,6 +1,7 @@
 package com.angelo.spaceshooter.screens;
 
 import com.angelo.spaceshooter.*;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
@@ -55,6 +56,11 @@ public class MainGameScreen implements Screen {
             for (Bullet bullet: enemy.getBullets()) {
                 game.batch.draw(bullet.getTexture(), bullet.getX(), bullet.getY());
             }
+        }
+
+        if (hero.getHealth() == 0) {
+            this.dispose();
+            game.setScreen(new GameOverScreen(game));
         }
 
         if (Gdx.input.isTouched()) {

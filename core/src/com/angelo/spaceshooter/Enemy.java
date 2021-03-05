@@ -24,12 +24,29 @@ public abstract class Enemy extends Ship {
 
     public abstract void entranceAnimation(float startY);
     public abstract void attack();
-    public abstract void updateAttack(Ship hero);
+    public abstract void updateAttack(Hero hero);
     public ArrayList<Bullet> getBullets() {return this.bulletList;}
     public void setWeaponKind(String weaponKind) {
         this.weaponKind = weaponKind;
     }
     public String getWeaponKind() {
         return this.weaponKind;
+    }
+
+    public void bulletCollission(Hero hero) {
+        for (Bullet bullet: this.getBullets()) {
+            if (bullet.getCollision().collidesWith(hero.getCollision().getColissionRect())) {
+                hero.updateHealthOnDamage(1);
+                bullet.setRemove(true);
+            }
+        }
+    }
+    public void deleteBullets() {
+        int idx = 0;
+        while (idx < this.getBullets().size()) {
+            if (this.getBullets().get(idx).getRemove())
+                this.getBullets().remove(idx);
+            idx++;
+        }
     }
 }

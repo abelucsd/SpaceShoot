@@ -15,30 +15,16 @@ public class BasicEnemy extends Enemy {
         this.getBullets().add(weaponFactory.createBullet(this.getWeaponKind(), this.getX(), this.getY()));
     }
 
-    public void updateAttack(Ship hero) {
+    public void updateAttack(Hero hero) {
         if (!this.getBullets().isEmpty()) {
             for (Bullet bullet: this.getBullets()) {
                 bullet.updateAttack(-1, 50);
                 if (bullet.getY() < 0)
-                    bullet.setRemove((true));
-
+                    bullet.setRemove(true);
                 bullet.getCollision().updateVariables(bullet.getX(), bullet.getY(), bullet.getHeight(), bullet.getWidth());;
             }
-
-            for (Bullet bullet: this.getBullets()) {
-                int idx = 0;
-                if (bullet.getCollision().collidesWith(hero.getCollision().getColissionRect())) {
-                    // hero life subtraction.
-                }
-            }
-
-            // delete bullets
-            int idx = 0;
-            while (idx < this.getBullets().size()) {
-                if (this.getBullets().get(idx).getRemove())
-                    this.getBullets().remove(idx);
-                idx++;
-            }
+            this.bulletCollission(hero);
+            this.deleteBullets();
         }
     }
 
