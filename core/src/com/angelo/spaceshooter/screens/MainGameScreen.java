@@ -9,8 +9,11 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.angelo.spaceshooter.EnemyFactory;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class MainGameScreen implements Screen {
+    private final int SCREEN_WIDTH = 800;
+    private final int MOVE_BUFFER_COLLISION = 50;
     SpaceShooterGame game;
     Hero hero;
     ArrayList<Enemy> basicEnemies = new ArrayList<Enemy>();
@@ -19,6 +22,8 @@ public class MainGameScreen implements Screen {
     EnemyFactory enemyFactory = new EnemyFactory();
     BitmapFont font;
     private float clock;
+    private float clockMove;
+    private Random rand;
 
     public MainGameScreen(SpaceShooterGame game) {
         this.game = game;
@@ -30,8 +35,9 @@ public class MainGameScreen implements Screen {
         basicEnemies = enemyFactory.createEnemies("basic", 5);
 
         font = new BitmapFont();
-
         clock = 0;
+        clockMove = 0;
+        rand = new Random();
     }
 
     @Override
@@ -80,9 +86,25 @@ public class MainGameScreen implements Screen {
             enemy.updateAttack(hero);
         }
 
+        if (clockMove > 1) {
+            for (Enemy enemy: basicEnemies) {
+                if (enemy.getX() <= MOVE_BUFFER_COLLISION)
+                    enemy.setDirection(1);
+                else if (enemy.getX() >= SCREEN_WIDTH - MOVE_BUFFER_COLLISION)
+                    enemy.setDirection(0);
+                else
+                    enemy.setDirection(rand.nextInt(2));
+                clockMove = 0;
+            }
+        }
+        for (Enemy enemy: basicEnemies) {
+            enemy.move();
+        }
+
         font.draw(game.batch, hero.getScore().getScoreString(), 10, 10);
 
         clock += Gdx.graphics.getDeltaTime();
+        clockMove += Gdx.graphics.getDeltaTime();
 
         game.batch.end();
 

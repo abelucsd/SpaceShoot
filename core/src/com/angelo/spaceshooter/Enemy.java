@@ -17,6 +17,7 @@ public abstract class Enemy extends Ship {
 
     private ArrayList<Bullet> bulletList = new ArrayList<Bullet>();
     private String weaponKind;
+    private int direction;
 
     public Enemy(float posX, float posY, int height, int width, Texture enemyImg) {
         super(posX, posY, height, width, enemyImg);
@@ -31,6 +32,13 @@ public abstract class Enemy extends Ship {
     }
     public String getWeaponKind() {
         return this.weaponKind;
+    }
+    public void move() {};
+    public void setDirection(int direction){
+        this.direction = direction;
+    };
+    public int getDirection(){
+        return this.direction;
     }
 
     public void bulletCollission(Hero hero) {
