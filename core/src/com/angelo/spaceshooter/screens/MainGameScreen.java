@@ -65,6 +65,8 @@ public class MainGameScreen implements Screen {
         }
 
         if (hero.getHealth() == 0) {
+            game.highScores.addHighScore(Integer.parseInt(hero.getScore().getScoreString()));
+            System.out.println("HIII");
             this.dispose();
             game.setScreen(new GameOverScreen(game));
         }
